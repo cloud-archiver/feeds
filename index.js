@@ -30,14 +30,13 @@ module.exports = class Feeds {
     mkdirp.sync(basePath)
 
     await Promise.all(feed.items.map(async item => {
-      this.logger('Saving', item.title)
+      this.logger.log('Saving', item.title)
 
       const title = `${item.pubDate} ${item.title}.json`.replace(/\//g, '').replace(/\ /g, '_')
       const path = [basePath, title].join('/')
 
       await fs.writeFileSync(path, JSON.stringify(item))
     }))
-
   }
 }
 
